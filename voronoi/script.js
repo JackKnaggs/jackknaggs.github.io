@@ -3,6 +3,7 @@ var ctx;
 var img;
 var w;
 var h;
+var points;
 
 function onLoad() {
 	console.log("test");
@@ -18,13 +19,18 @@ function randInt(maxVal) {
 	return Math.floor(Math.random()*maxVal);
 }
 
-function drawCanvas() {
+function generateVoronoi() {
 	points = [];
 	pointCount = parseInt(document.getElementById("points").value);
 	document.getElementById("pointCount").innerHTML = pointCount;
 	for (i = 0; i < pointCount; i++) {
 		points.push([randInt(w), randInt(h)]);
 	}
+	drawCanvas();
+}
+
+function drawCanvas() {
+	drawPoints = document.getElementById("drawPoints").checked;
 	for (x = 0; x < w; x++) {
 		for (y = 0; y < h; y++) {
 			distance = w + h; // make sure that starting distance is greater than maximum possible distance
@@ -36,7 +42,7 @@ function drawCanvas() {
 					point = i;
 				}
 			}
-			if (distance > Math.SQRT2) {
+			if (distance > Math.SQRT2 or not ) {
 				// multiply and modulo to give random effect
 				img.data[(x + y * w) * 4 + 0] = ((point + 1 + points.length) * 7398) % 256;
 				img.data[(x + y * w) * 4 + 1] = ((point + 1 + points.length) * 1623) % 256;
