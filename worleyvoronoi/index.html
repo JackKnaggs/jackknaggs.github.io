@@ -1,0 +1,14 @@
+<html>
+	<head>
+		<link rel="stylesheet" type="text/css" href="/style.css">
+		<script src="script.js"></script>
+		<title>Voronoi Diagram + Worley Noise</title>
+	</head>
+	<body onload="onLoad()">
+		<h1>Voronoi Diagram + Worley Noise</h1>
+		<a href="/">Back to front page</a><br>
+		<p>This is just a simple program to generate a <a href="https://en.wikipedia.org/wiki/Voronoi_diagram">Voronoi Diagram</a> and multiply it with <a href="https://en.wikipedia.org/wiki/Worley_noise">Worley Noise</a> to acheive an interesting semi-3d effect.<br>It is based on the <a href="/worley">Worley Noise</a> and <a href="/voronoi">Voronoi Diagram</a> code.</p><br>
+		<p>Points: <input type="range" min="1" max="100" value="32" class="slider" id="points" onchange="generateVoronoi()"> <span id="pointCount"></span> <input type="checkbox" id="invDist" onclick="drawCanvas()" checked> Invert Distance</p>
+		<canvas id="canvas" width="512" height="512"></canvas>
+	</body>
+</html>
