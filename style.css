@@ -7,7 +7,7 @@ body {
 }
 
 a, a:link, a:visited, a:active {
-	color: #dddddd;
+	color: #bbbbbb;
 	text-decoration: none;
 }
 
@@ -20,7 +20,7 @@ ul.thinglist {
 }
 
 li.thinglist:before {
-	color: #dddddd;
+	color: #bbbbbb;
 	content: "-";
 	padding-left: 8px;
 	padding-right: 8px;
