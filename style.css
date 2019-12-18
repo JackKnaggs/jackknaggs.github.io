@@ -1,0 +1,27 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto&display=swap'); /* Roboto font from Google Fonts */
+
+body {
+	background: #1f1f1f;
+	color: #eeeeee;
+	font-family: 'Roboto', sans-serif;
+}
+
+a, a:link, a:visited, a:active {
+	color: #dddddd;
+	text-decoration: none;
+}
+
+a:hover {
+	color: #ffffff;
+}
+
+ul.thinglist {
+	list-style: none;
+}
+
+li.thinglist:before {
+	color: #dddddd;
+	content: "-";
+	padding-left: 8px;
+	padding-right: 8px;
+}
