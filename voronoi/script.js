@@ -12,7 +12,7 @@ function onLoad() {
 	h = c.height;
 	ctx = c.getContext("2d");
 	img = ctx.createImageData(w, h);
-	drawCanvas();
+	generateVoronoi();
 }
 
 function randInt(maxVal) {
