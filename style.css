@@ -9,10 +9,12 @@ body {
 a, a:link, a:visited, a:active {
 	color: #bbbbbb;
 	text-decoration: none;
+	transition: 0.2s;
 }
 
 a:hover {
 	color: #ffffff;
+	transition: 0.2s;
 }
 
 ul.thinglist {
