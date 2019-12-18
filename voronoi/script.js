@@ -36,10 +36,16 @@ function drawCanvas() {
 					point = i;
 				}
 			}
-			// multiply and modulo to give random effect
-			img.data[(x + y * w) * 4 + 0] = ((point + 1 + points.length) * 7398) % 256;
-			img.data[(x + y * w) * 4 + 1] = ((point + 1 + points.length) * 1623) % 256;
-			img.data[(x + y * w) * 4 + 2] = ((point + 1 + points.length) * 9038) % 256;
+			if (distance > 1) {
+				// multiply and modulo to give random effect
+				img.data[(x + y * w) * 4 + 0] = ((point + 1 + points.length) * 7398) % 256;
+				img.data[(x + y * w) * 4 + 1] = ((point + 1 + points.length) * 1623) % 256;
+				img.data[(x + y * w) * 4 + 2] = ((point + 1 + points.length) * 9038) % 256;
+			} else {
+				img.data[(x + y * w) * 4 + 0] = 0;
+				img.data[(x + y * w) * 4 + 1] = 0;
+				img.data[(x + y * w) * 4 + 2] = 0;
+			}
 			img.data[(x + y * w) * 4 + 3] = 255;
 		}
 	}
