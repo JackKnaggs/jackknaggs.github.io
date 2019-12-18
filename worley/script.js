@@ -28,18 +28,15 @@ function drawCanvas() {
 	for (x = 0; x < w; x++) {
 		for (y = 0; y < h; y++) {
 			distance = w + h; // make sure that starting distance is greater than maximum possible distance
-			point = 0;
 			for (i = 0; i < points.length; i++) {
 				td = Math.abs(((x - points[i][0]) ** 2 + (y - points[i][1]) ** 2) ** 0.5);
 				if (td < distance) {
 					distance = td;
-					point = i;
 				}
 			}
-			// multiply and modulo to give random effect
-			img.data[(x + y * w) * 4 + 0] = ((point + 1 + points.length) * 7398) % 256;
-			img.data[(x + y * w) * 4 + 1] = ((point + 1 + points.length) * 1623) % 256;
-			img.data[(x + y * w) * 4 + 2] = ((point + 1 + points.length) * 9038) % 256;
+			img.data[(x + y * w) * 4 + 0] = distance * 2;
+			img.data[(x + y * w) * 4 + 1] = distance * 2;
+			img.data[(x + y * w) * 4 + 2] = distance * 2;
 			img.data[(x + y * w) * 4 + 3] = 255;
 		}
 	}
