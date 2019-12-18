@@ -42,7 +42,7 @@ function drawCanvas() {
 					point = i;
 				}
 			}
-			if (distance > Math.SQRT2 or not ) {
+			if (distance > Math.SQRT2 or not drawPoints) {
 				// multiply and modulo to give random effect
 				img.data[(x + y * w) * 4 + 0] = ((point + 1 + points.length) * 7398) % 256;
 				img.data[(x + y * w) * 4 + 1] = ((point + 1 + points.length) * 1623) % 256;
