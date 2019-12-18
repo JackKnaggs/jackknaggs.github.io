@@ -25,3 +25,25 @@ li.thinglist:before {
 	padding-left: 8px;
 	padding-right: 8px;
 }
+
+.slider {
+	-webkit-appearance: none;
+	width: 256px;
+	height: 4px;
+	background: #d3d3d3;
+	outline: none;
+}
+  
+.slider::-webkit-slider-thumb {
+	-webkit-appearance: none;
+	appearance: none;
+	width: 16px;
+	height: 16px;
+	cursor: pointer;
+ }
+  
+.slider::-moz-range-thumb {
+	width: 16px;
+	height: 16px;
+	cursor: pointer;
+}

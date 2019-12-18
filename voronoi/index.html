@@ -1,0 +1,14 @@
+<html>
+	<head>
+		<link rel="stylesheet" type="text/css" href="/style.css">
+		<script src="script.js"></script>
+		<title>Voronoi Noise Texture</title>
+	</head>
+	<body onload="onLoad()">
+		<h1>Voronoi Noise Texture</h1>
+		<a href="/">Back to front page</a><br>
+		<p>This is just a simple program to generate <a href="https://en.wikipedia.org/wiki/Worley_noise">Worley/Voronoi Noise</a>.</p><br>
+		<p>Points: <input type="range" min="1" max="100" value="32" class="slider" id="points" onchange="drawCanvas()"><span id="pointCount"></span></p>
+		<canvas id="canvas" width="512" height="512"></canvas>
+	</body>
+</html>
