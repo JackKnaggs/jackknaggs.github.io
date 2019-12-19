@@ -64,8 +64,8 @@ function drawCanvas() {
 		for (y = 0; y < h; y++) {
 			s = Math.sin(t/100);
 			c = Math.cos(t/100);
-			nx = Math.floor(((x * c - y * s) * ((Math.sin(t/150)+1)*7+1) + w * 16) % w);
-			ny = Math.floor(((x * s + y * c) * ((Math.sin(t/150)+1)*7+1) + h * 16) % h);
+			nx = Math.floor(((x * c - y * s) * ((Math.sin(t/150)+1)*7+1) + w * 65536) % w);
+			ny = Math.floor(((x * s + y * c) * ((Math.sin(t/150)+1)*7+1) + h * 65536) % h);
 			img.data[Math.floor(x + y * w) * 4 + 0] = img2.data[Math.floor(nx + ny * w) * 4 + 0];
 			img.data[Math.floor(x + y * w) * 4 + 1] = img2.data[Math.floor(nx + ny * w) * 4 + 1];
 			img.data[Math.floor(x + y * w) * 4 + 2] = img2.data[Math.floor(nx + ny * w) * 4 + 2];
