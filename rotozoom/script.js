@@ -34,18 +34,24 @@ function generatePattern() {
 	}
 	for (x = 0; x < w; x++) {
 		for (y = 0; y < h; y++) {
-			distance = w + h; // make sure that starting distance is greater than maximum possible distance
-			point = 0;
-			for (i = 0; i < points.length; i++) {
-				td = Math.abs(((x - points[i][0]) ** 2 + (y - points[i][1]) ** 2) ** 0.5);
-				if (td < distance) {
-					distance = td;
-					point = i;
+			if (x > 16 && x < w - 16 && y > 16 && y < h - 16) {
+				distance = w + h; // make sure that starting distance is greater than maximum possible distance
+				point = 0;
+				for (i = 0; i < points.length; i++) {
+					td = Math.abs(((x - points[i][0]) ** 2 + (y - points[i][1]) ** 2) ** 0.5);
+					if (td < distance) {
+						distance = td;
+						point = i;
+					}
 				}
+				img2.data[(x + y * w) * 4 + 0] = ((point + 1 + points.length) * 7398) % 256;
+				img2.data[(x + y * w) * 4 + 1] = ((point + 1 + points.length) * 1623) % 256;
+				img2.data[(x + y * w) * 4 + 2] = ((point + 1 + points.length) * 9038) % 256;
+			} else {
+				img2.data[(x + y * w) * 4 + 0] = 0;
+				img2.data[(x + y * w) * 4 + 1] = 0;
+				img2.data[(x + y * w) * 4 + 2] = 0;
 			}
-			img2.data[(x + y * w) * 4 + 0] = ((point + 1 + points.length) * 7398) % 256;
-			img2.data[(x + y * w) * 4 + 1] = ((point + 1 + points.length) * 1623) % 256;
-			img2.data[(x + y * w) * 4 + 2] = ((point + 1 + points.length) * 9038) % 256;
 			img2.data[(x + y * w) * 4 + 3] = 255;
 		}
 	}
