@@ -44,9 +44,11 @@ function generatePattern() {
 						point = i;
 					}
 				}
-				img2.data[(x + y * w) * 4 + 0] = ((point + 1 + points.length) * 7398) % 256;
-				img2.data[(x + y * w) * 4 + 1] = ((point + 1 + points.length) * 1623) % 256;
-				img2.data[(x + y * w) * 4 + 2] = ((point + 1 + points.length) * 9038) % 256;
+				newDist = (256 - distance) * 0.25;
+				// multiply and modulo to give random effect
+				img2.data[(x + y * w) * 4 + 0] = (((point + 1 + points.length) * 7398) % 256) * (newDist * 4 / 256);
+				img2.data[(x + y * w) * 4 + 1] = (((point + 1 + points.length) * 1623) % 256) * (newDist * 4 / 256);
+				img2.data[(x + y * w) * 4 + 2] = (((point + 1 + points.length) * 9038) % 256) * (newDist * 4 / 256);
 			} else {
 				img2.data[(x + y * w) * 4 + 0] = 0;
 				img2.data[(x + y * w) * 4 + 1] = 0;
