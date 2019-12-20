@@ -77,7 +77,7 @@ function showFramerate() {
 		clearInterval(frameTimer);
 		frameTimer = setInterval(drawCanvas, 1000 / r);
 		tm = 60 / r;
-		t = t * tm
+		t = t * tm;
 		lr = r;
 	}
 }
