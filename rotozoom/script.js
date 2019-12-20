@@ -10,6 +10,7 @@ var r = 60; // Target Framerate
 var lr = 60; // Previous Target Framerate
 var tm = 1.0; // Time Multiplier
 var frameTimer; // setInterval Timer Object
+var reader;
 
 function onLoad() {
 	console.log("test");
@@ -17,6 +18,7 @@ function onLoad() {
 	w = c.width;
 	h = c.height;
 	ctx = c.getContext("2d");
+	reader = new FileReader();
 	generatePattern();
 }
 
@@ -63,10 +65,26 @@ function generatePattern() {
 			}
 		}
 	}
-	//img2 = ctx.getImageData(0,0,w,h);
 	r = parseInt(document.getElementById("framerateSelect").value);
 	frameTimer = setInterval(drawCanvas, 1000 / r);
 	setInterval(showFramerate, 1000);
+}
+
+function generateImage() {
+	srcImg = document.getElementById("srcImg").files[0];
+	if (!srcImg.type.match('image.*')) {return;}
+	clearInterval(frameTimer);
+	ctx.clearRect(0, 0, w, h);
+	reader.onload = (function(imgFile) {
+		return function(e) {
+			texture = document.getElementById("texture");
+			texture.src = e.target.result;
+		};
+	})(srcImg);
+	reader.readAsDataURL(srcImg);
+	ctx.drawImage(texture, 0, 0, w, h);
+	img2 = ctx.getImageData(0, 0, w, h);
+	frameTimer = setInterval(drawCanvas, 1000 / r);
 }
 
 function showFramerate() {
