@@ -49,12 +49,13 @@ function generatePattern() {
 				img2.data[(x + y * w) * 4 + 0] = (((point + 1 + points.length) * 7398) % 256) * (newDist * 4 / 256);
 				img2.data[(x + y * w) * 4 + 1] = (((point + 1 + points.length) * 1623) % 256) * (newDist * 4 / 256);
 				img2.data[(x + y * w) * 4 + 2] = (((point + 1 + points.length) * 9038) % 256) * (newDist * 4 / 256);
+				img2.data[(x + y * w) * 4 + 3] = 255;
 			} else {
 				img2.data[(x + y * w) * 4 + 0] = 0;
 				img2.data[(x + y * w) * 4 + 1] = 0;
 				img2.data[(x + y * w) * 4 + 2] = 0;
+				img2.data[(x + y * w) * 4 + 3] = 0;
 			}
-			img2.data[(x + y * w) * 4 + 3] = 255;
 		}
 	}
 	//img2 = ctx.getImageData(0,0,w,h);
