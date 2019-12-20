@@ -5,6 +5,9 @@ var w;
 var h;
 var t = 0;
 var f = 0;
+var r = 30;
+var lr = 30;
+var frameTimer;
 
 function onLoad() {
 	console.log("test");
@@ -59,13 +62,20 @@ function generatePattern() {
 		}
 	}
 	//img2 = ctx.getImageData(0,0,w,h);
-	setInterval(drawCanvas,16);
+	r = parseInt(document.getElementById("framerateSelect").value);
+	frameTimer = setInterval(drawCanvas,1000/r);
 	setInterval(showFramerate,1000);
 }
 
 function showFramerate() {
 	document.getElementById("framerate").innerHTML = f.toString() + " fps";
 	f = 0;
+	r = parseInt(document.getElementById("framerateSelect").value);
+	if (r != lr) {
+		clearInterval(frameTimer);
+		frameTimer = setInterval(drawCanvas,1000/r);
+		lr = r;
+	}
 }
 
 function drawCanvas() {
