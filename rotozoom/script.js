@@ -6,9 +6,9 @@ var w; // Canvas Width
 var h; // Canvas Height
 var t = 0; // Total Frames Rendered
 var f = 0; // Frames Rendered since last check
-var r = 30; // Target Framerate
-var lr = 30; // Previous Target Framerate
-var tm = 0.5; // Time Multiplier
+var r = 60; // Target Framerate
+var lr = 60; // Previous Target Framerate
+var tm = 1.0; // Time Multiplier
 var frameTimer; // setInterval Timer Object
 
 function onLoad() {
@@ -77,7 +77,7 @@ function showFramerate() {
 		clearInterval(frameTimer);
 		frameTimer = setInterval(drawCanvas, 1000 / r);
 		tm = 60 / r;
-		t = t * tm;
+		t = t * (r / lr);
 		lr = r;
 	}
 }
