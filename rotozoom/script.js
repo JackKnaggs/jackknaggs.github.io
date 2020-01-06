@@ -101,10 +101,10 @@ function showFramerate() {
 }
 
 function drawCanvas() {
+	s = Math.sin(t / 100 * tm);
+	c = Math.cos(t / 100 * tm);
 	for (x = 0; x < w; x++) {
 		for (y = 0; y < h; y++) {
-			s = Math.sin(t / 100 * tm);
-			c = Math.cos(t / 100 * tm);
 			nx = Math.floor(((x * c - y * s) * ((Math.sin(t / 150 * tm) + 1) * 7 + 1) + w * 65536) % w);
 			ny = Math.floor(((x * s + y * c) * ((Math.sin(t / 150 * tm) + 1) * 7 + 1) + h * 65536) % h);
 			img.data[Math.floor(x + y * w) * 4 + 0] = img2.data[Math.floor(nx + ny * w) * 4 + 0];
