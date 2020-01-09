@@ -1,7 +1,5 @@
 var c; // HTML Canvas Object
 var ctx; // Canvas Context
-var img; // Output Image
-var img2; // Input Image
 var w; // Canvas Width
 var h; // Canvas Height
 var mx = 0; // Mouse X position
@@ -10,7 +8,8 @@ var cx = 0; // Canvas X position
 var cy = 0; // Canvas Y position
 var particles = [[]];
 var particleRadius = 4;
-var particleCount = 4;
+var particleCount = 256;
+var bounceEfficiency = 1.0001;
 var t = 0; // Total Frames Rendered
 var pt = 0;
 var f = 0; // Frames Rendered since last check
@@ -37,8 +36,6 @@ function onLoad() {
 	cx, cy = getElementPosition(c);
 	console.log(cx,cy);
 	ctx = c.getContext("2d");
-	reader = new FileReader();
-	img = ctx.createImageData(w, h);
 	for (i = 0; i < particleCount; i++) {
 		particles.push([randInt(w),randInt(h),randInt(8)-4,randInt(8)-4]);
 	}
@@ -72,7 +69,7 @@ function showFramerate() {
 	pr = parseInt(document.getElementById("physrateSelect").value);
 	if (pr != plr) {
 		clearInterval(physTimer);
-		frameTimer = setInterval(physUpdate, 1000 / pr);
+		physTimer = setInterval(physUpdate, 1000 / pr);
 		pm = 64 / pr;
 		pu = pu * (pr / plr);
 		plr = pr;
@@ -97,29 +94,29 @@ function physUpdate() {
 		//console.log(pd);
 		particles[particle][2] -= (particles[particle][0] - mx)/(md/4) / pr;
 		particles[particle][3] -= (particles[particle][1] - my)/(md/4) / pr;
-		particles[particle][2] *= 1 - 0.05 * pm;
-		particles[particle][3] *= 1 - 0.05 * pm;
+		particles[particle][2] *= 1 - 0.01 * pm;
+		particles[particle][3] *= 1 - 0.01 * pm;
 		if (pd < particleRadius * 2) {
-			particles[particle][2] = -particles[particle][2] * 1.1 + Math.random() - 0.5;
-			particles[particle][3] = -particles[particle][3] * 1.1 + Math.random() - 0.5;
+			particles[particle][2] = -particles[particle][2] * bounceEfficiency + Math.random() - 0.5;
+			particles[particle][3] = -particles[particle][3] * bounceEfficiency + Math.random() - 0.5;
 		}
 		particles[particle][0] += particles[particle][2];
 		particles[particle][1] += particles[particle][3];
 		if (particles[particle][0] < 0) {
 			particles[particle][0] = 0;
-			particles[particle][2] = Math.abs(particles[particle][2]);
+			particles[particle][2] = Math.abs(particles[particle][2]) * bounceEfficiency + Math.random() - 0.5;
 		}
 		if (particles[particle][1] < 0) {
 			particles[particle][1] = 0;
-			particles[particle][3] = Math.abs(particles[particle][3]);
+			particles[particle][3] = Math.abs(particles[particle][3]) * bounceEfficiency + Math.random() - 0.5;
 		}
 		if (particles[particle][0] > w-1) {
 			particles[particle][0] = w-1;
-			particles[particle][2] = -Math.abs(particles[particle][2]);
+			particles[particle][2] = -Math.abs(particles[particle][2]) * bounceEfficiency + Math.random() - 0.5;
 		}
 		if (particles[particle][1] > h-1) {
 			particles[particle][1] = h-1;
-			particles[particle][3] = -Math.abs(particles[particle][3]);
+			particles[particle][3] = -Math.abs(particles[particle][3]) * bounceEfficiency + Math.random() - 0.5;
 		}
 		//console.log(particles);
 	}
@@ -128,24 +125,15 @@ function physUpdate() {
 }
 
 function drawCanvas() {
-	for (x = 0; x < w; x++) {
-		for (y = 0; y < h; y++) {
-			pixelVal = false;
-			for (particle = 0; particle < particles.length; particle++) {
-				nx = Math.abs(particles[particle][0] - x);
-				ny = Math.abs(particles[particle][1] - y);
-				if (nx + ny <= particleRadius * 2) {
-					md = Math.sqrt(nx * nx + ny * ny);
-					pixelVal = (md < particleRadius) || pixelVal //Math.max(255 - md,0)
-				}
-			}
-			//img.data[Math.floor(x + y * w) * 4 + 0] = 0;
-			//img.data[Math.floor(x + y * w) * 4 + 1] = 0;
-			//img.data[Math.floor(x + y * w) * 4 + 2] = 0;
-			img.data[Math.floor(x + y * w) * 4 + 3] = pixelVal * 255;
-		}
+	ctx.fillStyle = "#000000";
+	ctx.clearRect(0, 0, w, h);
+	for (particle = 0; particle < particles.length; particle++) {
+		x = particles[particle][0];
+		y = particles[particle][1];
+		ctx.beginPath();
+		ctx.arc(x, y, particleRadius, 0, 2 * Math.PI);
+		ctx.fill();
 	}
-	ctx.putImageData(img, 0, 0);
 	t++;
 	f++;
 }
