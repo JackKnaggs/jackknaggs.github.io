@@ -10,6 +10,7 @@ var particles = [[]];
 var particleRadius = 4;
 var particleCount = 256;
 var bounceEfficiency = 1.01;
+var dragCoef = 0.01;
 var t = 0; // Total Frames Rendered
 var pt = 0;
 var f = 0; // Frames Rendered since last check
@@ -94,8 +95,8 @@ function physUpdate() {
 		//console.log(pd);
 		particles[particle][2] -= (particles[particle][0] - mx)/(md/4) / pr;
 		particles[particle][3] -= (particles[particle][1] - my)/(md/4) / pr;
-		particles[particle][2] *= 1 - 0.01 * pm;
-		particles[particle][3] *= 1 - 0.01 * pm;
+		particles[particle][2] *= 1 - dragCoef * pm;
+		particles[particle][3] *= 1 - dragCoef * pm;
 		if (pd < particleRadius * 2) {
 			particles[particle][2] = -particles[particle][2] * bounceEfficiency + Math.random() - 0.5;
 			particles[particle][3] = -particles[particle][3] * bounceEfficiency + Math.random() - 0.5;
