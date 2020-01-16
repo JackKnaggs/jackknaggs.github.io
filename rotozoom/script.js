@@ -106,12 +106,14 @@ function drawCanvas() {
 	c = Math.cos(t / 100 * tm);
 	for (x = 0; x < w; x++) {
 		for (y = 0; y < h; y++) {
-			nx = Math.floor(((x * c - y * s) * ((Math.sin(t / 150 * tm) + 1) * 7 + 1) + w * 65536) % w);
-			ny = Math.floor(((x * s + y * c) * ((Math.sin(t / 150 * tm) + 1) * 7 + 1) + h * 65536) % h);
-			img.data[Math.floor(x + y * w) * 4 + 0] = img2.data[Math.floor(nx + ny * w) * 4 + 0];
-			img.data[Math.floor(x + y * w) * 4 + 1] = img2.data[Math.floor(nx + ny * w) * 4 + 1];
-			img.data[Math.floor(x + y * w) * 4 + 2] = img2.data[Math.floor(nx + ny * w) * 4 + 2];
-			img.data[Math.floor(x + y * w) * 4 + 3] = img2.data[Math.floor(nx + ny * w) * 4 + 3];
+			tx = x - w/2;
+			ty = y + h/2
+			nx = Math.floor((((x * c - y * s) * ((Math.sin(t / 150 * tm) + 1) * 7 + 1) + w * 65536) - w/2) % w);
+			ny = Math.floor((((x * s + y * c) * ((Math.sin(t / 150 * tm) + 1) * 7 + 1) + h * 65536) - h/2) % h);
+			img.data[Math.floor(tx + ty * w) * 4 + 0] = img2.data[Math.floor(nx + ny * w) * 4 + 0];
+			img.data[Math.floor(tx + ty * w) * 4 + 1] = img2.data[Math.floor(nx + ny * w) * 4 + 1];
+			img.data[Math.floor(tx + ty * w) * 4 + 2] = img2.data[Math.floor(nx + ny * w) * 4 + 2];
+			img.data[Math.floor(tx + ty * w) * 4 + 3] = img2.data[Math.floor(nx + ny * w) * 4 + 3];
 		}
 	}
 	ctx.putImageData(img, 0, 0);
