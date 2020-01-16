@@ -18,7 +18,6 @@ function onLoad() {
 	w = c.width;
 	h = c.height;
 	ctx = c.getContext("2d");
-	ctx.imageSmoothingEnabled = false; //disable interpolation when scaling images
 	reader = new FileReader();
 	generatePattern();
 }
@@ -83,6 +82,7 @@ function generateImage() {
 		};
 	})(srcImg);
 	reader.readAsDataURL(srcImg);
+	ctx.imageSmoothingEnabled = false; //disable interpolation when scaling images
 	ctx.drawImage(texture, 0, 0, w, h);
 	img2 = ctx.getImageData(0, 0, w, h);
 	frameTimer = setInterval(drawCanvas, 1000 / r);
