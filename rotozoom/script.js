@@ -18,6 +18,7 @@ function onLoad() {
 	w = c.width;
 	h = c.height;
 	ctx = c.getContext("2d");
+	ctx.imageSmoothingEnabled = false; //disable interpolation when scaling images
 	reader = new FileReader();
 	generatePattern();
 }
