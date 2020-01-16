@@ -104,8 +104,8 @@ function showFramerate() {
 function drawCanvas() {
 	s = Math.sin(t / 100 * tm);
 	c = Math.cos(t / 100 * tm);
-	for (x = 0; x < w; x++) {
-		for (y = 0; y < h; y++) {
+	for (x = -w/2; x < w/2; x++) {
+		for (y = -h/2; y < h/2; y++) {
 			tx = x - w/2;
 			ty = y + h/2
 			nx = Math.floor((((x * c - y * s) * ((Math.sin(t / 150 * tm) + 1) * 7 + 1) + w * 65536) - w/2) % w);
