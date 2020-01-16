@@ -107,7 +107,7 @@ function drawCanvas() {
 	for (x = -w/2; x < w/2; x++) {
 		for (y = -h/2; y < h/2; y++) {
 			tx = x - w/2;
-			ty = y + h/2
+			ty = y + h/2 + 1;
 			nx = Math.floor((((x * c - y * s) * ((Math.sin(t / 150 * tm) + 1) * 7 + 1) + w * 65536) - w/2) % w);
 			ny = Math.floor((((x * s + y * c) * ((Math.sin(t / 150 * tm) + 1) * 7 + 1) + h * 65536) - h/2) % h);
 			img.data[Math.floor(tx + ty * w) * 4 + 0] = img2.data[Math.floor(nx + ny * w) * 4 + 0];
